@@ -6,5 +6,7 @@
 #include <time.h>
 
 char *pass_generator(int len);
+void save_password(const char *site, const char *password);
+
 
 #endif

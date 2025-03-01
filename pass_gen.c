@@ -1,6 +1,6 @@
 #include "header.h"
 
-char *pass_generator(int len)
+char *pass_generator(const int len)
 {
     srand(time(NULL));
 
