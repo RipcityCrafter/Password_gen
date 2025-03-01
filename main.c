@@ -3,17 +3,19 @@
 int main()
 {
     int len_of_pass;
-    int stop_of_run;
     char *password;
     char site_name[100];
+    int n_of_pass;
+    int i;
 
-    stop_of_run = 1;
-    while (stop_of_run == 1)
+    printf("Combien de mpd voulez vous enregistre? ->\n");
+    scanf("%d", &n_of_pass);
+
+    i = 0;
+    while (i < n_of_pass)
     {
-        printf("Quelle taille doit faire le mot de passe? ->");
+        printf("\nQuelle taille doit faire le mot de passe? ->");
         scanf("%d", &len_of_pass);
-        printf("\n");
-
         password = pass_generator(len_of_pass);
         printf("Mot de passe généré : %s\n", password);
 
@@ -23,8 +25,7 @@ int main()
         save_password(site_name, password);
 
         free(password);
-        printf("Avez vous un autre mpd a generer? 1.OUI / 2.NON->");
-        scanf("%d", &stop_of_run);
+        i++;
     }
 
     return (0);
@@ -38,7 +39,7 @@ void save_password(const char *site, const char *password)
         return;
     }
 
-    fprintf(file, "%s : %s\n", site, password);
-
+    fprintf(file, "@%-25s : %s\n", site, password);
     fclose(file);
 }
+
