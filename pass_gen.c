@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
 #include "header.h"
 
 char *pass_generator(int len)
