@@ -6,10 +6,10 @@
 char *pass_generator(int len)
 {
     srand(time(NULL));
+
     int i;
     char *password;
     password = malloc(sizeof(char) * (len + 1));
-
     if (!password)
     return (NULL);
 
