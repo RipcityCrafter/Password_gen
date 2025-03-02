@@ -3,14 +3,15 @@
 #include <time.h>
 #include <string.h>
 
-#define KEY_LENGTH 50
+#define KEY_LENGTH 200
 
 void generate_key(char *key, int len) {
-    const char charset[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    int i;
+    const char charset[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}|;:,.<>?";
+    int i = 0;
 
-    for (i = 0; i < len; i++) {
+    while (i < len) {
         key[i] = charset[rand() % (sizeof(charset) - 1)];
+        i++;
     }
     key[len] = '\0';
 }
@@ -24,22 +25,22 @@ void check_and_create_key_file() {
 
         key_file = fopen("key.txt", "w");
         if (key_file == NULL) {
-            perror("Erreur lors de la création du fichier key.txt");
+            perror("");
             return;
         }
         fprintf(key_file, "%s", key);
         fclose(key_file);
-        printf("Clé générée et enregistrée dans key.txt.\n");
+        printf("Key generated and saved in key.txt.\n");
     } else {
         fclose(key_file);
-        printf("Clé déjà présente dans key.txt.\n");
+        printf("Key already present in key.txt.\n");
     }
 }
 
 void encrypt_decrypt_file(const char *filename, const char *key) {
     FILE *file = fopen(filename, "r+");
     if (!file) {
-        perror("Erreur lors de l'ouverture du fichier");
+        perror("");
         return;
     }
 
@@ -52,9 +53,8 @@ void encrypt_decrypt_file(const char *filename, const char *key) {
         i++;
     }
     fclose(file);
-    printf("Fichier '%s' traité.\n", filename);
+    printf("File '%s' processed.\n", filename);
 }
-
 
 int main() {
     int choice;
@@ -64,31 +64,30 @@ int main() {
 
     FILE *key_file = fopen("key.txt", "r");
     if (key_file == NULL) {
-        perror("Erreur lors de la lecture de key.txt");
+        perror("");
         return 1;
     }
     fgets(key, KEY_LENGTH + 1, key_file);
     fclose(key_file);
 
     printf("Vault Maker - Menu\n");
-    printf("1. Crypter le fichier passwords.txt\n");
-    printf("2. Decrypter le fichier passwords.txt\n");
-    printf("Choisissez une option (1 ou 2): ");
+    printf("1. Encrypt the file passwords.txt\n");
+    printf("2. Decrypt the file passwords.txt\n");
+    printf("Choose an option (1 or 2): ");
     scanf("%d", &choice);
 
     switch (choice) {
         case 1:
             encrypt_decrypt_file("passwords.txt", key);
-            printf("Fichier crypté avec succès.\n");
+            printf("File encrypted successfully.\n");
             break;
         case 2:
             encrypt_decrypt_file("passwords.txt", key);
-            printf("Fichier décrypté avec succès.\n");
+            printf("File decrypted successfully.\n");
             break;
         default:
-            printf("Option invalide.\n");
+            printf("Invalid option.\n");
     }
 
     return 0;
 }
-
