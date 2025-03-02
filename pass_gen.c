@@ -1,21 +1,26 @@
 #include "header.h"
 
-char *pass_generator(const int len)
+void pass_generator(const int len_of_pass, const int n_of_pass, char **pass_tab)
 {
-    srand(time(NULL));
-
-    int i;
-    char *password;
-    password = malloc(sizeof(char) * (len + 1));
-    if (!password)
-    return (NULL);
+    int i ;
+    int j;
 
     i = 0;
-    while (i < len)
+    srand(time(NULL));
+    while (i < n_of_pass)
     {
-        password[i] =  32 + (rand() % 92);
+        pass_tab[i] = malloc(sizeof(char) * (len_of_pass + 1));
+        if (!pass_tab[i])
+            return;
+
+        j = 0;
+        while (j < len_of_pass)
+        {
+            pass_tab[i][j] = 32 + (rand() % 92);
+            j++;
+        }
+        pass_tab[i][j] = '\0';
         i++;
     }
-    password[i] = '\0';
-    return (password);    
+    pass_tab[i] = NULL;
 }

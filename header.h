@@ -5,8 +5,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-char *pass_generator(int len);
+void malloc_pass_tab(char ***pass, int n_of_pass);
 void save_password(const char *site, const char *password);
-
+void pass_generator(const int len_of_pass, const int n_of_pass, char **pass_tab);
 
 #endif
