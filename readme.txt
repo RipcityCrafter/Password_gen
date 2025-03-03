@@ -5,7 +5,7 @@ Password Generator and Vault Maker
 1. Go to the "Password Generator" folder.
 
 2. Compile the program:
-   gcc -o password_generator password_generator.c
+   gcc -o password_generator password_generator.c main.c
 
 3. Run the program to generate your passwords. They will be saved in "passwords.txt": 
 ./password_generator
